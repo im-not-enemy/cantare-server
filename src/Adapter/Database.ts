@@ -10,4 +10,7 @@ export default class Database{
     public insert(newDoc:{[key:string]:any}):void{
         db.insert(newDoc)
     }
+    public async findAll():Promise<{[key:string]:any}>{
+        return await db.find({}).execAsync()
+    }
 }

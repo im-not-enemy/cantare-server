@@ -21,3 +21,9 @@ app.post('/menu',(req,res)=>{
     db.insert({abc:abc})
     console.log(`insert: {abc:${abc}}`)
 })
+
+app.get('/menu',async(req,res)=>{
+    const menu = await db.findAll()
+    console.log(`send: ${JSON.stringify(menu)}`)
+    res.send(menu)
+})
