@@ -27,3 +27,8 @@ app.get('/menu',async(req,res)=>{
     console.log(`send: ${JSON.stringify(menu)}`)
     res.send(menu)
 })
+
+app.get('/question/random',async(req,res)=>{
+    const abc = await db.findRandom()
+    res.send(abc)
+})
