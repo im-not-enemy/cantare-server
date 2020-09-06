@@ -1,3 +1,6 @@
 node_modules
-dist/
-database/
+dist/*
+database/*
+uploads/*
+output/audiveris/*
+output/xml2abc/*
