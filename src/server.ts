@@ -35,24 +35,24 @@ app.get('/',(req,res)=>{
     console.log('helllo world!')
 })
 
-app.post('/menu',(req,res)=>{
+app.post('/api/v1/menu',(req,res)=>{
     const abc = req.body.abc
     db.insert({abc:abc})
     console.log(`insert: {abc:${abc}}`)
 })
 
-app.get('/menu',async(req,res)=>{
+app.get('/api/v1/menu',async(req,res)=>{
     const menu = await db.findAll()
     console.log(`send: ${JSON.stringify(menu)}`)
     res.send(menu)
 })
 
-app.get('/question/random',async(req,res)=>{
+app.get('/api/v1/question/random',async(req,res)=>{
     const abc = await db.findRandom()
     res.send(abc)
 })
 
-app.post('/scan/upload', upload.single('musicSheetImage'),(req,res,next)=>{
+app.post('/api/v1/scan/upload', upload.single('musicSheetImage'),(req,res,next)=>{
     const fullFilename = req.file.originalname
     const filename = path.parse(fullFilename).name
     console.log(`${fullFilename} is uploaded!`)
