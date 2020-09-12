@@ -65,14 +65,23 @@ app.post('/api/v1/scan/upload', upload.single('musicSheetImage'),(req,res,next)=
         if (succeed){
             console.log("succeed to convert to .abc!")
             console.log(fs.readFileSync(`./output/xml2abc/${filename}.abc`).toString())
-            res.send(fs.readFileSync(`./output/xml2abc/${filename}.abc`).toString())
+            res.send({
+                status: "SUCCEED",
+                text: fs.readFileSync(`./output/xml2abc/${filename}.abc`).toString()
+            })
         }else{
             console.log("failed to convert to .abc!")
-            res.send("[xml2abc] failed to convert")
+            res.send({
+                status: "FAILED",
+                text: "[xml2abc] failed to convert"
+            })
         }
     }else{
         console.log("failed to convert to .mxl!")
-        res.send("[audiveris] failed to convert")
+        res.send({
+            status: "FAILED",
+            text: "[audiveris] failed to convert"
+        })
     }
 
 })
