@@ -41,6 +41,13 @@ app.post('/api/v1/menu',(req,res)=>{
     console.log(`insert: {abc:${abc}}`)
 })
 
+app.put('/api/v1/menu/:_id/result',(req,res)=>{
+    const timestamp = req.body.timestamp
+    const result = req.body.result
+    db.update(req.params._id,timestamp,result)
+    console.log(`update: ${req.params._id},${timestamp},${result}`)
+})
+
 app.get('/api/v1/menu',async(req,res)=>{
     const menu = await db.findAll()
     console.log(`send: ${JSON.stringify(menu)}`)
