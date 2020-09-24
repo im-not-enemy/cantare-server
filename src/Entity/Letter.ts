@@ -1,35 +1,38 @@
 export default class Letter {
-    constructor(private str:string){}
-    public type(){
+    public type:string = ""
+    constructor(private str:string){
+        this.load()
+    }
+    private load(){
         switch (true){
         //長さ・リズム
             case /[0-9]/.test(this.str):
-                return 'NoteLength'
+                this.type = 'NoteLength'
                 break
             case this.str === '>':
-                return 'BrokenRhythm'
+                this.type = 'BrokenRhythm'
                 break
             case this.str === '-':
-                return 'Tie'
+                this.type = 'Tie'
                 break
             case this.str === '(':
-                return 'Bracket'
+                this.type = 'Bracket'
                 break
         //高さ
             case this.str === '^':
             case this.str === '_':
-                return 'Accidental'
+                this.type = 'Accidental'
                 break
             case this.str === '\'':
             case this.str === ',':
-                return 'Octave'
+                this.type = 'Octave'
                 break
             case /\w/.test(this.str):
-                return 'Pitch'
+                this.type = 'Pitch'
                 break
             //その他
             default:
-                return 'Unknown'
+                this.type = 'Unknown'
                 break
         }
     }
