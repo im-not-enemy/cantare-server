@@ -1,6 +1,5 @@
 import Song from '../Entity/Song'
 
-
 test('sample01',()=>{
     const song = new Song("T:Sample01\nM:4/4\nL:1/4\nK:C\nCEGA|GEDC||")
     expect(song.toString()).toBe("T:Sample01\nM:4/4\nL:1/4\nK:C\nCEGA|GEDC||")
