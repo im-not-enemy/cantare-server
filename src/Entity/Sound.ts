@@ -1,3 +1,9 @@
+//概要: ABC記譜法の文字列
+//仕様: transpose(semitones:number): 
+//      半音上げ下げしたABC文字を返す
+//      元の音が調号なしの場合: 調号なし or フラットの音を返す
+//      元の音がシャープの場合: シャープを返す
+
 import Note from '@tonaljs/note'
 import {toMidi} from '@tonaljs/midi'
 import abc from '@tonaljs/abc-notation'
