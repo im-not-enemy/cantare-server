@@ -17,6 +17,7 @@
   "dependencies": {
     "@line/bot-sdk": "^7.0.0",
     "@tonaljs/abc-notation": "^3.5.5",
+    "@tonaljs/key": "^4.1.2",
     "@tonaljs/midi": "^3.5.4",
     "@tonaljs/note": "^3.6.0",
     "bluebird": "^3.7.2",
