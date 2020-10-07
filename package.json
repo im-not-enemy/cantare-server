@@ -16,6 +16,9 @@
   "license": "ISC",
   "dependencies": {
     "@line/bot-sdk": "^7.0.0",
+    "@tonaljs/abc-notation": "^3.5.5",
+    "@tonaljs/midi": "^3.5.4",
+    "@tonaljs/note": "^3.6.0",
     "bluebird": "^3.7.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -29,8 +32,6 @@
     "pm2": "^4.2.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.5",
-    "tonal": "^2.2.2",
-    "tonal-abc-notation": "^2.2.2",
     "typescript": "^3.7.4",
     "xml2js": "^0.4.23"
   },
