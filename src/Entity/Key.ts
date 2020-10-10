@@ -2,6 +2,7 @@ import tonalKey from '@tonaljs/key'
 
 export default class Key {
     public signatures = new Array
+    public signatureType:string = ""
     public type:string
     public tonic:string
     private scale = new Array
@@ -15,15 +16,30 @@ export default class Key {
         this.type = this.tonalObj.type
         this.tonic = this.tonalObj.tonic
         this.scale = this.tonalObj.scale
+        console.log(`keyString: ${keyString}, type: ${this.type}, scale: ${this.scale}`)
 
         if (this.type === 'major'){
             this.scale.forEach((el:string)=>{
-                if (RegExp(/.*#$/).test(el)) this.signatures.push(el.replace('#',''))
+                if (RegExp(/.*#$/).test(el)){
+                    this.signatures.push(el.replace('#',''))
+                    this.signatureType = "sharp"
+                }
+                else if (RegExp(/.*b$/).test(el)){
+                    this.signatures.push(el.replace('b',''))
+                    this.signatureType = "flat"
+                }
             })
         }
         else if (this.type === 'minor'){
             this.tonalObj.natural.scale.forEach((el:string)=>{
-                if (RegExp(/.*b$/).test(el)) this.signatures.push(el.replace('b',''))
+                if (RegExp(/.*b$/).test(el)){
+                    this.signatures.push(el.replace('b',''))
+                    this.signatureType = "flat"
+                }
+                else if (RegExp(/.*#$/).test(el)){
+                    this.signatures.push(el.replace('#',''))
+                    this.signatureType = "sharp"
+                }
             })
         }
     }

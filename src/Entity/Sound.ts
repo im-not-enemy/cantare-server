@@ -6,8 +6,10 @@ export default class Sound {
     private sharp:string = ""
     private flat:string = ""
     private none:string = ""
+    private origin:string = ""
 
     constructor(src:string){
+        this.origin = src
         if (RegExp(/^\^/).test(src)) this.sharp = src
         else if (RegExp(/^_/).test(src)) this.flat = src
         else this.none = src
@@ -57,5 +59,8 @@ export default class Sound {
             else str = this.none
         }
         return str
+    }
+    public toStringOrigin(){
+        return this.origin
     }
 }

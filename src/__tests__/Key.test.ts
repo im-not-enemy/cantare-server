@@ -9,6 +9,16 @@ test('signatures',()=>{
     expect(new Key('Bbm').signatures).toEqual(['B','D','E','G','A'])
 })
 
+test('signatureType',()=>{
+    expect(new Key('C').signatureType).toBe('')
+    expect(new Key('C').signatureType).toBe('')
+    expect(new Key('G').signatureType).toBe('sharp')
+    expect(new Key('B').signatureType).toBe('sharp')
+    expect(new Key('F').signatureType).toBe('flat')
+    expect(new Key('Cm').signatureType).toBe('flat')
+    expect(new Key('Bbm').signatureType).toBe('flat')
+})
+
 test('type',()=>{
     expect(new Key('C').type).toBe('major')
     expect(new Key('Cm').type).toBe('minor')
