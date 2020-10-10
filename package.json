@@ -21,6 +21,7 @@
     "@tonaljs/key": "^4.1.2",
     "@tonaljs/midi": "^3.5.4",
     "@tonaljs/note": "^3.6.0",
+    "abc-notation-transpose": "0.0.5",
     "bluebird": "^3.7.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
