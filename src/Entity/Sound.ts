@@ -1,31 +1,61 @@
-//概要: ABC記譜法の文字列
-//仕様: transpose(semitones:number): 
-//      半音上げ下げしたABC文字を返す
-//      元の音が調号なしの場合: 
-//          priolityの指定なし: フラットを返す
-//          priolityの指定あり: 指定された臨時記号で返す
-//      元の音がシャープの場合: シャープを返す
-//      元の音がフラットの場合: フラットを返す
-
 import Note from '@tonaljs/note'
 import {toMidi} from '@tonaljs/midi'
-import abc from '@tonaljs/abc-notation'
+import Abc from '@tonaljs/abc-notation'
 
 export default class Sound {
-    constructor(public src:string){}
-    public transpose(seminotes:number,priolity?:string){
-        const before = toMidi(abc.abcToScientificNotation(this.src))
-        if (before !== null){
-            let note
-            if (RegExp(/^\^/).test(this.src)) note = Note.fromMidiSharps(before + seminotes)
-            else if (RegExp(/^_/).test(this.src)) note = Note.fromMidi(before + seminotes)
-            else if (priolity === 'sharp') note = Note.fromMidiSharps(before + seminotes)
-            else note = Note.fromMidi(before + seminotes)
-            this.src = abc.scientificToAbcNotation(note)
+    private sharp:string = ""
+    private flat:string = ""
+    private none:string = ""
+
+    constructor(src:string){
+        if (RegExp(/^\^/).test(src)) this.sharp = src
+        else if (RegExp(/^_/).test(src)) this.flat = src
+        else this.none = src
+    }
+    private reset() {
+        this.sharp = ""
+        this.none = ""
+        this.flat = ""
+    }
+
+    public transpose(seminotes:number):Sound{
+        const before:{[key:string]:any} = {abc:"",midi:0}
+
+        before.abc = this.none ?this.none :this.sharp ?this.sharp :this.flat
+        before.midi = toMidi(Abc.abcToScientificNotation(before.abc))
+
+        this.reset()
+        const sharp = Note.fromMidiSharps(before.midi + seminotes)
+        const flat = Note.fromMidi(before.midi + seminotes)
+
+        if (sharp === flat){
+            this.none = Abc.scientificToAbcNotation(sharp)
+        }
+        else {
+            this.sharp = Abc.scientificToAbcNotation(sharp)
+            this.flat = Abc.scientificToAbcNotation(flat)
         }
         return this
     }
-    public toString():string {
-        return this.src
+
+    public toString(accidental?:string){
+        let str:string = ""
+
+        if (accidental === "sharp"){
+            if (this.sharp !== "") str = this.sharp
+            else if (this.flat !== "") str = this.flat
+            else str = this.none
+        } 
+        else if (accidental === "flat"){
+            if (this.flat !== "") str = this.flat
+            else if (this.sharp !== "") str = this.sharp
+            else str = this.none
+        }
+        else {
+            if (this.flat !== "") str = this.flat
+            else if (this.sharp !== "") str = this.sharp
+            else str = this.none
+        }
+        return str
     }
 }
