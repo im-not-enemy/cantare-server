@@ -5,10 +5,12 @@ export default class Key {
     public signatureType:string = ""
     public type:string
     public tonic:string
+    public keyString:string
     private scale = new Array
     private tonalObj:any
 
     constructor(keyString:string){
+        this.keyString = keyString
         this.tonalObj = RegExp(/.*m$/).test(keyString)
             ? tonalKey.minorKey(keyString.replace('m',''))
             : tonalKey.majorKey(keyString)
@@ -16,7 +18,6 @@ export default class Key {
         this.type = this.tonalObj.type
         this.tonic = this.tonalObj.tonic
         this.scale = this.tonalObj.scale
-        console.log(`keyString: ${keyString}, type: ${this.type}, scale: ${this.scale}`)
 
         if (this.type === 'major'){
             this.scale.forEach((el:string)=>{

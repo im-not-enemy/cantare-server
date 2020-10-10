@@ -1,15 +1,15 @@
+import Key from './Key'
+import Melody from './Melody'
+
 export default class Song {
     private src:string = ""
     public title:string =""
     public meter:string = ""
     public unitNoteLength:string = ""
-    public key:string = ""
-    public melody:string = ""
+    public key:Key = new Key('')
+    public melody:Melody = new Melody('',this.key)
 
     constructor(private abc:string){
-        this.load(abc)
-    }
-    private load(abc:string){
         this.src = abc
         this.src.split('\n').forEach((row)=>{
             switch (true) {
@@ -23,15 +23,20 @@ export default class Song {
                     this.unitNoteLength = row.substr(2,row.length)
                     break
                 case /^K:.*/.test(row):
-                    this.key = row.substr(2,row.length)
+                    this.key = new Key(row.substr(2,row.length))
                     break
                 case /.*\|\|$/.test(row):
-                    this.melody = row
+                    this.melody = new Melody(row,this.key)
                     break
             }
         })
     }
+    public transpose(keyString:string){
+        this.key = new Key(keyString)
+        this.melody.transpose(this.key)
+        return this
+    }
     public toString(){
-        return this.src
+        return `T:${this.title}\nM:${this.meter}\nL:${this.unitNoteLength}\nK:${this.key.keyString}\n${this.melody.toString()}`
     }
 }
