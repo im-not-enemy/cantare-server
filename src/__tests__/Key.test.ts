@@ -1,18 +1,24 @@
 import Key from '../Entity/Key'
 
-test('',()=>{
-    expect(new Key('C').sharps).toEqual([])
-    expect(new Key('C').flats).toEqual([])
+test('signatures',()=>{
+    expect(new Key('C').signatures).toEqual([])
+    expect(new Key('C').signatures).toEqual([])
+    expect(new Key('G').signatures).toEqual(['F'])
+    expect(new Key('B').signatures).toEqual(['C','D','F','G','A'])
+    expect(new Key('Cm').signatures).toEqual(['E','A','B'])
+    expect(new Key('Bbm').signatures).toEqual(['B','D','E','G','A'])
+})
 
-    expect(new Key('G').sharps).toEqual(['F'])
-    expect(new Key('G').flats).toEqual([])
+test('type',()=>{
+    expect(new Key('C').type).toBe('major')
+    expect(new Key('Cm').type).toBe('minor')
+    expect(new Key('B').type).toBe('major')
+    expect(new Key('Bbm').type).toBe('minor')
+})
 
-    expect(new Key('B').sharps).toEqual(['C','D','F','G','A'])
-    expect(new Key('B').flats).toEqual([])
-
-    expect(new Key('Cm').sharps).toEqual([])
-    expect(new Key('Cm').flats).toEqual(['E','A','B'])
-
-    expect(new Key('Bbm').sharps).toEqual([])
-    expect(new Key('Bbm').flats).toEqual(['B','D','E','G','A'])
+test('tonic',()=>{
+    expect(new Key('C').tonic).toBe('C')
+    expect(new Key('Cm').tonic).toBe('C')
+    expect(new Key('B').tonic).toBe('B')
+    expect(new Key('Bbm').tonic).toBe('Bb')
 })
