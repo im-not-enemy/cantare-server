@@ -21,4 +21,7 @@ export default class Database{
     public async update(_id:string,timestamp:string,result:string){
         db.update({_id:_id},{$push:{history:{timestamp:timestamp,result:result}}})
     }
+    public async remove(_id:string){
+        db.remove({_id:_id})
+    }
 }

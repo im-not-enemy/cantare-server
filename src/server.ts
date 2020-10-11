@@ -39,6 +39,13 @@ app.post('/api/v1/menu',(req,res)=>{
     const abc = req.body.abc
     db.insert({abc:abc})
     console.log(`insert: {abc:${abc}}`)
+    res.sendStatus(200)
+})
+
+app.delete('/api/v1/menu/:_id',(req,res)=>{
+    db.remove(req.params._id)
+    console.log(`remove: ${req.params._id}`)
+    res.sendStatus(200)
 })
 
 app.put('/api/v1/menu/:_id/result',(req,res)=>{
@@ -46,6 +53,7 @@ app.put('/api/v1/menu/:_id/result',(req,res)=>{
     const result = req.body.result
     db.update(req.params._id,timestamp,result)
     console.log(`update: ${req.params._id},${timestamp},${result}`)
+    res.sendStatus(200)
 })
 
 app.get('/api/v1/menu',async(req,res)=>{
