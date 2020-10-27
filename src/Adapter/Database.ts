@@ -18,8 +18,8 @@ export default class Database{
         const random = Math.floor(Math.random()*count);
         return await db.find({}).skip(random).limit(1).execAsync()
     }
-    public async update(_id:string,timestamp:string,result:string){
-        db.update({_id:_id},{$push:{history:{timestamp:timestamp,result:result}}})
+    public async updateAbc(_id:string,abc:string){
+        db.update({_id:_id},{$set:{abc:abc}})
     }
     public async remove(_id:string){
         db.remove({_id:_id})
