@@ -21,6 +21,9 @@ export default class Database{
     public async updateAbc(_id:string,abc:string){
         db.update({_id:_id},{$set:{abc:abc}})
     }
+    public async updateRemembered(_id:string,remembered:boolean){
+        db.update({_id:_id},{$set:{remembered:remembered}})
+    }
     public async remove(_id:string){
         db.remove({_id:_id})
     }

@@ -48,11 +48,18 @@ app.delete('/api/v1/menu/:_id',(req,res)=>{
     res.sendStatus(200)
 })
 
-app.put('/api/v1/menu/:_id',(req,res)=>{
+app.put('/api/v1/menu/:_id/abc',(req,res)=>{
     const _id = req.params._id
     const abc = req.body.abc
     db.updateAbc(_id,abc)
     console.log(`update: ${_id},abc: ${abc}`)
+    res.sendStatus(200)
+})
+app.put('/api/v1/menu/:_id/remembered',(req,res)=>{
+    const _id = req.params._id
+    const remembered = req.body.remembered
+    db.updateRemembered(_id,remembered)
+    console.log(`update: ${_id},remembered: ${remembered}`)
     res.sendStatus(200)
 })
 
