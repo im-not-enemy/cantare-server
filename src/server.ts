@@ -71,6 +71,11 @@ app.get('/api/v1/menu',async(req,res)=>{
     res.send(menu)
 })
 
+app.get('/api/v1/menu/totalCount',async(req,res)=>{
+    const totalCount = await db.countAll()
+    res.send(String(totalCount))
+})
+
 app.get('/api/v1/question/random',async(req,res)=>{
     const abc = await db.findRandom()
     res.send(abc)
