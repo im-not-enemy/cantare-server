@@ -64,8 +64,10 @@ app.put('/api/v1/menu/:_id/remembered',(req,res)=>{
 })
 
 app.get('/api/v1/menu',async(req,res)=>{
-    const menu = await db.findAll()
-    console.log(`send: ${JSON.stringify(menu)}`)
+    const page = parseInt(String(req.query.page)) || 1
+    const menusPerPage = parseInt(String(req.query.menusPerPage)) || 10
+    const skip = (page - 1)* menusPerPage
+    const menu = await db.findPage(skip,menusPerPage)
     res.send(menu)
 })
 

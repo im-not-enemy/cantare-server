@@ -13,6 +13,9 @@ export default class Database{
     public async findAll():Promise<{[key:string]:any}>{
         return await db.find({}).execAsync()
     }
+    public async findPage(skip:number,limit:number):Promise<{[key:string]:any}>{
+        return await db.find({}).skip(skip).limit(limit).execAsync()
+    }
     public async countAll():Promise<number>{
         return await db.count({}).execAsync()
     }
