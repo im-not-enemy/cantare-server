@@ -11,10 +11,10 @@ export default class Database{
         db.insert(newDoc)
     }
     public async findAll():Promise<{[key:string]:any}>{
-        return await db.find({}).execAsync()
+        return await db.find({}).sort({abc:1}).execAsync()
     }
     public async findPage(skip:number,limit:number):Promise<{[key:string]:any}>{
-        return await db.find({}).skip(skip).limit(limit).execAsync()
+        return await db.find({}).sort({abc:1}).skip(skip).limit(limit).execAsync()
     }
     public async countAll():Promise<number>{
         return await db.count({}).execAsync()
