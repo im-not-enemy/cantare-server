@@ -13,6 +13,9 @@ export default class Database{
     public async findAll():Promise<{[key:string]:any}>{
         return await db.find({}).execAsync()
     }
+    public async countAll():Promise<number>{
+        return await db.count({}).execAsync()
+    }
     public async findRandom():Promise<{[key:string]:any}>{
         const count = await db.count({}).execAsync()
         const random = Math.floor(Math.random()*count);
