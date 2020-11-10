@@ -22,10 +22,10 @@ export default class Database{
     public async countRemembered():Promise<number>{
         return await db.count({remembered:true}).execAsync()
     }
-    public async findRandom():Promise<{[key:string]:any}>{
-        const count = await db.count({}).execAsync()
+    public async findRandom(query:{}):Promise<{[key:string]:any}>{
+        const count = await db.count(query).execAsync()
         const random = Math.floor(Math.random()*count);
-        return await db.find({}).skip(random).limit(1).execAsync()
+        return await db.find(query).skip(random).limit(1).execAsync()
     }
     public async updateAbc(_id:string,abc:string){
         db.update({_id:_id},{$set:{abc:abc}})

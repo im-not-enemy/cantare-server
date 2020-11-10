@@ -81,8 +81,13 @@ app.get('/api/v1/menu/count/remembered',async(req,res)=>{
     res.send(String(count))
 })
 
-app.get('/api/v1/question/random',async(req,res)=>{
-    const abc = await db.findRandom()
+app.get('/api/v1/question/random/all',async(req,res)=>{
+    const abc = await db.findRandom({})
+    res.send(abc)
+})
+
+app.get('/api/v1/question/random/inprogress',async(req,res)=>{
+    const abc = await db.findRandom({$not:{remembered:true}})
     res.send(abc)
 })
 
