@@ -5,6 +5,7 @@ import path from 'path'
 import fs from 'fs'
 
 import AbcDatabase from './Adapter/AbcDatabase'
+import PreceptsDatabase from './Adapter/PreceptsDatabase'
 import Audiveris from './Adapter/Audiveris'
 import Xml2abc from './Adapter/Xml2abc'
 
@@ -12,6 +13,7 @@ const app = express()
 const port = "3000"
 
 const db = new AbcDatabase()
+const pdb = new PreceptsDatabase()
 const audiveris = new Audiveris()
 const xml2abc = new Xml2abc()
 
@@ -137,5 +139,16 @@ app.post('/api/v1/scan/upload', upload.single('musicSheetImage'),(req,res,next)=
             text: "[audiveris] failed to convert"
         })
     }
+})
 
+app.post('/api/v1/precepts',(req,res)=>{
+    const word = req.body.word
+    pdb.add(word)
+    console.log(`add: {word:${word}}`)
+    res.sendStatus(200)
+})
+
+app.get('/api/v1/precepts',async(req,res)=>{
+    const precepts = await pdb.findAll()
+    res.send(precepts)
 })
