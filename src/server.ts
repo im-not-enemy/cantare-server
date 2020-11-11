@@ -63,6 +63,14 @@ app.put('/api/v1/menu/:_id/remembered',(req,res)=>{
     res.sendStatus(200)
 })
 
+app.put('/api/v1/menu/:_id/bookmarked',(req,res)=>{
+    const _id = req.params._id
+    const bookmarked = req.body.bookmarked
+    db.updateBookmarked(_id,bookmarked)
+    console.log(`update: ${_id},bookmarked: ${bookmarked}`)
+    res.sendStatus(200)
+})
+
 app.get('/api/v1/menu',async(req,res)=>{
     const page = parseInt(String(req.query.page)) || 1
     const menusPerPage = parseInt(String(req.query.menusPerPage)) || 10

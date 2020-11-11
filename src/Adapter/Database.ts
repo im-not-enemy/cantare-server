@@ -33,6 +33,9 @@ export default class Database{
     public async updateRemembered(_id:string,remembered:boolean){
         db.update({_id:_id},{$set:{remembered:remembered}})
     }
+    public async updateBookmarked(_id:string,bookmarked:boolean){
+        db.update({_id:_id},{$set:{bookmarked:bookmarked}})
+    }
     public async remove(_id:string){
         db.remove({_id:_id})
     }
