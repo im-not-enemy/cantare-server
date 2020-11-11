@@ -1,6 +1,6 @@
 node_modules
 dist/*
-database/*
+database/*.bak
 uploads/*
 output/audiveris/*
 output/xml2abc/*

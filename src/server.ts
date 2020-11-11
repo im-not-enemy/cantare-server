@@ -4,14 +4,14 @@ import multer from 'multer'
 import path from 'path'
 import fs from 'fs'
 
-import Database from './Adapter/Database'
+import AbcDatabase from './Adapter/AbcDatabase'
 import Audiveris from './Adapter/Audiveris'
 import Xml2abc from './Adapter/Xml2abc'
 
 const app = express()
 const port = "3000"
 
-const db = new Database()
+const db = new AbcDatabase()
 const audiveris = new Audiveris()
 const xml2abc = new Xml2abc()
 
