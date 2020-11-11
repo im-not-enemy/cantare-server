@@ -7,8 +7,8 @@ bluebird.promisifyAll(nedb.prototype)
 bluebird.promisifyAll(Cursor.prototype)
 
 export default class Database{
-    public insert(newDoc:{[key:string]:any}):void{
-        db.insert(newDoc)
+    public insert(abc:string,remembered:boolean,bookmarked:boolean):void{
+        db.insert({abc:abc, remembered:remembered, bookmarked:bookmarked})
     }
     public async findAll():Promise<{[key:string]:any}>{
         return await db.find({}).sort({abc:1}).execAsync()

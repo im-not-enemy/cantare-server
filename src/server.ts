@@ -37,7 +37,9 @@ app.get('/api/v1',(req,res)=>{
 
 app.post('/api/v1/menu',(req,res)=>{
     const abc = req.body.abc
-    db.insert({abc:abc})
+    const remembered = false
+    const bookmarked = false
+    db.insert(abc,remembered,bookmarked)
     console.log(`insert: {abc:${abc}}`)
     res.sendStatus(200)
 })
