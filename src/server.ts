@@ -148,6 +148,13 @@ app.post('/api/v1/precepts',(req,res)=>{
     res.sendStatus(200)
 })
 
+app.delete('/api/v1/precepts/:_id',(req,res)=>{
+    const _id = req.params._id
+    pdb.remove(_id)
+    console.log(`remove: {_id:${_id}}`)
+    res.sendStatus(200)
+})
+
 app.get('/api/v1/precepts',async(req,res)=>{
     const precepts = await pdb.findAll()
     res.send(precepts)

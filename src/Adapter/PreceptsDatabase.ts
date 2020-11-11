@@ -14,6 +14,9 @@ export default class PreceptsDatabase{
         const created = moment().format()
         db.insert({word:word,created:created})
     }
+    public remove(_id:string):void{
+        db.remove({_id:_id})
+    }
     public async findAll():Promise<{[key:string]:any}>{
         return await db.find({}).sort({created:1}).execAsync()
     }
