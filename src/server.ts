@@ -99,6 +99,11 @@ app.get('/api/v1/question/random/inprogress',async(req,res)=>{
     res.send(abc)
 })
 
+app.get('/api/v1/question/random/bookmarked',async(req,res)=>{
+    const abc = await db.findRandom({bookmarked: true})
+    res.send(abc)
+})
+
 app.post('/api/v1/scan/upload', upload.single('musicSheetImage'),(req,res,next)=>{
     const fullFilename = req.file.originalname
     const filename = path.parse(fullFilename).name
